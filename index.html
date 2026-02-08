@@ -2045,6 +2045,10 @@ button{
     window.closeCartModal = closeCartModal;
 
     window.openOrderModal = function(itemName) {
+  alert("Chức năng đặt hàng đang bảo trì. Vui lòng liên hệ 0934 128 331. Xin cảm ơn!");
+  return;
+};
+(itemName) {
       currentOrderSource = "single";
       currentOrderItem = itemName;
       const orderNameEl = document.getElementById("orderItemName");
@@ -2054,6 +2058,10 @@ button{
     };
 
     window.openOrderFromCart = function() {
+  alert("Chức năng đặt hàng đang bảo trì. Vui lòng liên hệ 0934 128 331. Xin cảm ơn!");
+  return;
+};
+() {
       if (cart.length === 0) {
         alert("Giỏ hàng đang trống, vui lòng thêm sản phẩm trước!");
         return;
