@@ -1,99 +1,2262 @@
+
 <!doctype html>
 <html lang="vi">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>HƯƠNG CÀ PHÊ</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>HƯƠNG CÀ PHÊ - COFFEE & WORKSHOP</title>
+ <!-- Favicon logo HƯƠNG CÀ PHÊ -->
+<link rel="icon" type="image/png"
+      href="https://img.upanhnhanh.com/c2d0c29cdc2d1ff37e1f0ff09650fd4c">
+<link rel="shortcut icon" type="image/png"
+      href="https://img.upanhnhanh.com/c2d0c29cdc2d1ff37e1f0ff09650fd4c">
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
-    body{
-      height:100vh;
-      background: linear-gradient(135deg, #6b3e26, #4b2a18);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      color:white;
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background-color: #f3f4f6;
     }
-    .box{
-      max-width:800px;
-      padding:40px;
-      background: rgba(255,255,255,0.06);
-      border-radius:20px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      animation: fadeIn 1.2s ease;
+    .container-max { max-width: 1200px; margin: 0 auto; }
+    .card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
     }
-    h1{font-size:42px;font-weight:800;margin-bottom:20px}
-    p{font-size:20px;line-height:1.7;opacity:.95}
-    .address{margin-top:25px;font-size:18px;opacity:.9}
-    .newyear{
-      margin-top:35px;
-      font-size:22px;
-      font-weight:600;
-      color:#ffd369;
-      animation: blink 1.5s infinite;
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
-    footer{
-      position:fixed;
-      bottom:0;
-      width:100%;
-      text-align:center;
-      padding:12px 10px;
-      font-size:14px;
-      background: rgba(0,0,0,0.25);
-      backdrop-filter: blur(6px);
+    .zalo-button {
+      position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background-color: #0084FF; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25); transition: all 0.3s ease; cursor: pointer;
     }
-    @keyframes fadeIn{
-      from{opacity:0; transform:translateY(30px);}
-      to{opacity:1; transform:translateY(0);}
+    .zalo-button:hover { transform: scale(1.1); box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+    .zalo-button img { width: 35px; height: 35px; }
+
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      display: none; align-items: center; justify-content: center; z-index: 10000;
     }
-    @keyframes blink{
-      0%,100%{opacity:1;}
-      50%{opacity:0.5;}
+    .modal-content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .modal.show {
+      display: flex;
+    }
+    .modal.show .modal-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Dòng chữ chạy NGANG dưới menu */
+    .banner-marquee {
+      position: relative;
+      overflow: hidden;
+      background-color: rgba(0, 128, 0, 0.9);
+      color: white;
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      padding: 6px 0;
+    }
+    .banner-marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Thông báo nhanh chạy từ DƯỚI LÊN TRÊN liên tục */
+    #thongbaoMarquee {
+      position: relative;
+      height: 80px;
+      overflow: hidden;
+    }
+    #thongbaoContent {
+      position: absolute;
+      bottom: 0;
+      animation: scrollUp 8s linear infinite;
+    }
+    @keyframes scrollUp {
+      0% { transform: translateY(100%); }
+      100% { transform: translateY(-100%); }
+    }
+    #thongbaoContent p {
+      margin: 0;
+      padding: 2px 0;
+    }
+
+    @media (max-width: 1024px) {
+      .container-max { padding-left: 12px; padding-right: 12px; }
+    }
+
+    /* ==== TRANG TRÍ THỰC ĐƠN ==== */
+    .menu-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 1.25rem;
+    }
+    .menu-title-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu-title-main span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #bbf7d0, #16a34a);
+      color: white;
+      font-size: 16px;
+    }
+    .menu-subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+    .menu-tags {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 0.5rem;
+      padding-bottom: 2px;
+      margin-top: 6px;
+    }
+    .menu-tag-pill {
+      white-space: nowrap;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #15803d;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .menu-tag-pill:hover {
+      background: #22c55e;
+      color: white;
+      border-color: #22c55e;
+    }
+
+    .menu-category-block {
+      position: relative;
+      border-radius: 0.9rem;
+      border: 1px solid #e5e7eb;
+      background:
+        radial-gradient(circle at 0 0, rgba(34,197,94,0.08), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(34,197,94,0.06), transparent 55%),
+        #ffffff;
+      padding: 1.1rem 1rem 1rem;
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .menu-category-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: #166534;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .menu-category-label small {
+      font-weight: 500;
+      color: #9ca3af;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .menu-item-card {
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 0.75rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-item-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(16,185,129,0.06), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+    .menu-item-card:hover::before {
+      opacity: 1;
+    }
+    .menu-item-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+      border-color: #bbf7d0;
+    }
+
+    .menu-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .menu-item-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 0.92rem;
+    }
+    .menu-price-pill {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #bbf7d0;
+      white-space: nowrap;
+    }
+    .menu-item-extra {
+      font-size: 0.7rem;
+      color: #9ca3af;
+      margin-top: 3px;
+    }
+    .menu-actions {
+      margin-top: 0.55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .menu-badge-hot {
+      font-size: 0.7rem;
+      color: #f97316;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 2px;
+    }
+    .menu-badge-hot span {
+      font-size: 0.7rem;
+    }
+
+    @media (max-width: 640px) {
+      .menu-category-block {
+        padding: 0.9rem 0.8rem 0.8rem;
+      }
+      .menu-item-card {
+        padding: 0.7rem 0.75rem;
+      }
+    }
+
+    /* ==== DARK MODE ==== */
+    body.dark-mode {
+      background-color: #020617;
+      color: #e5e7eb;
+    }
+    body.dark-mode nav {
+      background-color: #022c22;
+    }
+    body.dark-mode .banner-marquee {
+      background-color: rgba(22, 101, 52, 0.9);
+    }
+    body.dark-mode .card {
+      background: #020617;
+      border: 1px solid #1f2937;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    }
+    body.dark-mode .menu-category-block {
+      background:
+        radial-gradient(circle at 0 0, rgba(34,197,94,0.12), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(34,197,94,0.08), transparent 55%),
+        #020617;
+      border-color: #1f2937;
+    }
+    body.dark-mode .menu-item-card {
+      background: #020617;
+      border-color: #1f2937;
+    }
+    body.dark-mode .menu-price-pill {
+      background: #052e16;
+      border-color: #16a34a;
+      color: #bbf7d0;
+    }
+    body.dark-mode .menu-subtitle {
+      color: #9ca3af;
+    }
+    body.dark-mode .menu-tag-pill {
+      background: #022c22;
+      border-color: #16a34a;
+      color: #bbf7d0;
+    }
+    body.dark-mode .menu-tag-pill:hover {
+      background: #16a34a;
+      color: #f9fafb;
+    }
+    body.dark-mode input,
+    body.dark-mode textarea {
+      background-color: #020617;
+      color: #e5e7eb;
+      border-color: #4b5563;
+    }
+    body.dark-mode input::placeholder,
+    body.dark-mode textarea::placeholder {
+      color: #6b7280;
     }
   </style>
-</head>
 
+<style>
+/* ===== HƯƠNG CÀ PHÊ – Coffee Theme Override ===== */
+:root{
+  --coffee:#6b3e26;
+  --coffee-dark:#4b2a18;
+  --cream:#f6efe7;
+  --card:#fffaf4;
+  --soft:#f3e4d7;
+}
+
+body{
+  background:var(--cream) !important;
+}
+
+.card{
+  background:var(--card) !important;
+  border-radius:14px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+}
+
+.border-green-500{ border-color:var(--coffee) !important; }
+.bg-green-50{ background:var(--soft) !important; }
+.text-green-700{ color:var(--coffee) !important; }
+.bg-green-600{ background:var(--coffee) !important; }
+.bg-green-700{ background:var(--coffee-dark) !important; }
+.border-green-500{ border-color:var(--coffee) !important; }
+.text-green-600{ color:var(--coffee) !important; }
+.hover\:bg-green-700:hover{ background:var(--coffee-dark) !important; }
+.hover\:bg-green-50:hover{ background:var(--soft) !important; }
+
+.banner-marquee{
+  background:var(--coffee) !important;
+  color:white !important;
+}
+
+.menu-price-pill{
+  background:var(--coffee) !important;
+  color:white !important;
+}
+
+button{
+  transition:all .2s ease;
+}
+</style>
+
+</head>
 <body>
 
-  <div class="box">
-    <h1>HƯƠNG CÀ PHÊ</h1>
+  <!-- ======== BANNER ======== -->
+  <header class="relative overflow-hidden font-[Montserrat,sans-serif]">
+    <img src="https://img.upanhnhanh.com/217e435663dd19d73eb62b17964b3518"
+         alt="Banner HƯƠNG CÀ PHÊ"
+         class="w-full h-40 md:h-52 object-cover brightness-75">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  </header>
 
-    <p>
-      WEBSITE ĐANG TRONG QUÁ TRÌNH HOÀN THIỆN.<br>
-      HẸN GẶP LẠI BẠN TẠI <b>HƯƠNG CÀ PHÊ</b> SỚM NHẤT.
-    </p>
+  <!-- ======== MENU ======== -->
+  <nav class="bg-green-600 text-white shadow-sm sticky top-0 z-40">
+    <div class="container-max mx-auto px-4">
+      <ul class="flex flex-wrap gap-3 md:gap-6 py-3 font-semibold text-sm items-center">
+        <li>
+          <a href="#gioithieu" class="hover:underline" onclick="showSection('gioithieu')">Giới thiệu</a>
+        </li>
+        <li>
+          <a href="#sanpham" class="hover:underline" onclick="showSection('sanpham')">Thực Đơn</a>
+        </li>
+        <li>
+          <a href="#lienheSection" class="hover:underline" onclick="showSection('lienhe')">Liên hệ</a>
+        </li>
 
-    <div class="address">
-      📍 Ngọc Sơn Đông, Thăng Bình, Tp Đà Nẵng
+        <!-- Nút đăng nhập Admin -->
+        <li id="adminLoginNav">
+          <button type="button"
+                  class="hover:underline text-left"
+                  onclick="openAdminLogin()">
+            Đăng nhập Admin
+          </button>
+        </li>
+
+        <!-- Chỉ admin mới thấy -->
+        <li id="gopyMenu" class="hidden">
+          <a href="#gopyAdminSection" class="hover:underline" onclick="showSection('gopyAdmin')">Form góp ý</a>
+        </li>
+        <li id="orderListMenu" class="hidden">
+          <a href="#ordersSection" class="hover:underline" onclick="showSection('orders')">Danh sách khách đặt hàng</a>
+        </li>
+
+        <!-- Nút Dark mode -->
+        <li>
+          <button type="button"
+                  onclick="toggleDarkMode()"
+                  class="flex items-center gap-1 text-xs md:text-sm px-3 py-1 rounded-full bg-green-700/60 hover:bg-green-800 transition">
+            <span id="themeIcon">🌙</span>
+            <span class="hidden sm:inline" id="themeText">Dark</span>
+          </button>
+        </li>
+
+        <!-- GIỎ HÀNG -->
+        <li class="ml-auto flex items-center gap-1 cursor-pointer text-[13px] md:text-sm px-3 py-1 rounded-full bg-green-700 hover:bg-green-800 transition"
+            onclick="openCart()">
+          🛒 <span class="hidden sm:inline">Giỏ Hàng</span>
+          (<span id="cartCount">0</span>)
+        </li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="newyear">
-      🎉 CHÚC MỪNG NĂM MỚI 2026 🎉
+  <!-- ======== DÒNG CHỮ CHẠY NGANG ======== -->
+  <div class="banner-marquee w-full">
+    <span>🌿 <b>HƯƠNG CÀ PHÊ</b> Mừng Khai Trương, HƯƠNG CÀ PHÊ giảm giá 10% trên hóa đơn từ ngày 8-10/02/2026. Chúc quý khách năm mới an khang thịnh vượng. 🌿</span>
+  </div>
+  <!-- ======== MAIN ======== -->
+  <main class="container-max mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr_240px] gap-6">
+
+    <!-- ==== CỘT TRÁI ==== -->
+    <aside>
+      <!-- Đã đăng nhập admin -->
+      <div id="loggedBox" class="card p-3 text-sm hidden">
+        <div class="p-2 bg-gray-50 rounded mb-2" id="loggedInfo">
+          Xin chào Admin
+        </div>
+        <button onclick="doLogout()" class="w-full bg-red-500 hover:bg-red-600 transition text-white py-1.5 rounded">
+          Đăng xuất
+        </button>
+      </div>
+
+      <!-- Form góp ý của khách -->
+      <div class="card p-3 mt-3 text-sm" id="gopySection">
+        <h4 class="font-semibold text-green-700 mb-2">💬 Góp ý cho HƯƠNG CÀ PHÊ</h4>
+        <p class="text-xs text-gray-600 mb-2">
+          Mọi ý kiến đóng góp của quý khách là động lực để HƯƠNG CÀ PHÊ hoàn thiện tốt hơn mỗi ngày. Xin chân thành cảm ơn! 💚
+        </p>
+        <input id="gopyName" type="text" placeholder="Họ tên của bạn" class="w-full border rounded p-2 text-sm mb-2">
+        <textarea id="gopyText" rows="3" placeholder="Nội dung góp ý..." class="w-full border rounded p-2 text-sm"></textarea>
+        <button onclick="sendGopy()" class="mt-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-1.5 rounded text-sm w-full">
+          Gửi góp ý
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==== CỘT GIỮA ==== -->
+    <section class="space-y-6">
+
+      <!-- ======= GIỚI THIỆU ======= -->
+      <div id="gioithieu" class="card p-4">
+  <h2 class="text-lg font-bold text-green-700 mb-3 text-center">
+    🌿 GIỚI THIỆU HƯƠNG CÀ PHÊ – 62 TRẦN THỊ LÝ 🌿
+  </h2>
+
+  <p class="mb-2 text-sm font-semibold text-green-700">
+    Không gian thưởng thức cà phê đẳng cấp tại 62 Trần Thị Lý
+  </p>
+
+  <p class="mb-2 text-sm">
+    Tọa lạc tại số <b>62 Trần Thị Lý, Xã Thăng Bình, Thành phố Đà Nẵng</b>, liền kề công viên Hà Kiều xanh mát, 
+    <b>HƯƠNG CÀ PHÊ</b> tự hào là điểm đến mang phong cách mới mẻ, tinh tế và phù hợp cho mọi nhu cầu thưởng thức cà phê hiện đại.
+  </p>
+
+  <p class="mb-2 text-sm">
+    Bước vào <b>HƯƠNG CÀ PHÊ</b>, quý khách sẽ cảm nhận ngay bầu không khí <b>trang nhã – sạch sẽ – thoáng đãng</b>, 
+    được chăm chút tỉ mỉ trong từng chi tiết. Không gian quán được thiết kế hài hòa theo phong cách 
+    <i>mộc – sang trọng</i>, kết hợp giữa ánh sáng nhẹ, nội thất tinh gọn cùng bố cục mở, tạo nên cảm giác 
+    thư giãn tuyệt đối nhưng vẫn giữ được nét chuyên nghiệp và lịch lãm.
+  </p>
+
+  <div class="border-l-4 border-green-500 bg-green-50 px-3 py-2 my-3 text-sm">
+    <p class="font-semibold mb-1">🏠 Không gian gồm 2 khu vực chính:</p>
+    <ul class="list-disc list-inside">
+      <li>
+        <b>Tầng 1:</b> Không gian mở, thoáng khí — phù hợp cho các buổi gặp gỡ thân mật, thư giãn yên bình hoặc 
+        không gian trò chuyện riêng tư nhẹ nhàng.
+      </li>
+      <li>
+        <b>Tầng 2:</b> Trang bị máy lạnh, mang đến môi trường <b>yên tĩnh – chuyên nghiệp</b>, lý tưởng cho 
+        học tập, làm việc, họp nhóm nhỏ hoặc trao đổi công việc cùng đối tác.
+      </li>
+    </ul>
+  </div>
+
+  <p class="mb-2 text-sm">
+    Chất lượng phục vụ luôn là yếu tố được đặt lên hàng đầu tại <b>HƯƠNG CÀ PHÊ</b>. 
+    Đội ngũ nhân viên chuyên nghiệp, chỉn chu và lịch sự luôn sẵn sàng mang đến trải nghiệm 
+    <b>thân thiện – chu đáo – hài lòng tối đa</b> cho mỗi vị khách.
+  </p>
+
+  <p class="mb-2 text-sm">
+    Bên cạnh đó, quán sở hữu thực đơn phong phú và được chọn lọc kỹ lưỡng: từ các dòng 
+    <b>cà phê truyền thống</b>, <b>trà</b>, <b>trà sữa</b>, <b>nước ép</b>, <b>sinh tố</b>, <b>đá xay</b> 
+    cho đến các loại thức uống giải khát khác. Từng món đều được chuẩn hóa công thức nhằm đảm bảo 
+    <b>hương vị ổn định – đậm đà – chất lượng cao</b>.
+  </p>
+
+  <p class="mb-2 text-sm">
+    Với sự kết hợp hài hòa giữa <b>không gian đẹp</b> – <b>tiện nghi đầy đủ</b> – <b>vị trí thuận lợi</b> – 
+    <b>phong cách phục vụ chuyên nghiệp</b>, <b>HƯƠNG CÀ PHÊ</b> vinh dự trở thành điểm hẹn lý tưởng cho quý khách mỗi ngày — 
+    dù là để thư giãn, làm việc hay chia sẻ khoảnh khắc cùng người thân, bạn bè.
+  </p>
+
+  <p class="mt-3 text-sm font-semibold text-center">
+    ⭐ <b>HƯƠNG CÀ PHÊ – Tinh tế trong từng khoảnh khắc, trọn vẹn trong từng ly cà phê.</b><br>
+    📍 <i>62 Trần Thị Lý, Xã Thăng Bình, Thành phố Đà Nẵng</i><br>
+    🌿 Rất hân hạnh được đón tiếp và phục vụ quý khách!
+  </p>
+</div>
+
+
+      <!-- ======= THỰC ĐƠN / SẢN PHẨM ======= -->
+      <div id="sanpham" class="card p-4 hidden">
+        <div class="menu-header">
+          <div class="menu-title-main">
+            <span class="icon">☕</span>
+            <div>
+              <h2 class="text-lg font-bold text-green-700">
+                Thực đơn HƯƠNG CÀ PHÊ
+              </h2>
+              <p class="menu-subtitle">
+                Chọn món bạn thích – HƯƠNG CÀ PHÊ pha chế tỉ mỉ cho từng ly nước 💚
+              </p>
+            </div>
+          </div>
+
+          <!-- Tag danh mục (cuộn nhanh, chỉ là anchor) -->
+          <div class="menu-tags">
+            <a href="#menu-ca-phe" class="menu-tag-pill">Cà phê</a>
+            <a href="#menu-ca-cao" class="menu-tag-pill">Ca cao</a>
+            <a href="#menu-tra" class="menu-tag-pill">Trà</a>
+            <a href="#menu-tra-sua" class="menu-tag-pill">Trà sữa</a>
+            <a href="#menu-sua-chua" class="menu-tag-pill">Sữa chua</a>
+            <a href="#menu-sinh-to" class="menu-tag-pill">Sinh tố</a>
+            <a href="#menu-nuoc-ep" class="menu-tag-pill">Nước ép</a>
+            <a href="#menu-da-xay" class="menu-tag-pill">Đá xay</a>
+            <a href="#menu-soda" class="menu-tag-pill">Soda</a>
+            <a href="#menu-dong-chai" class="menu-tag-pill">Nước đóng chai / Snack</a>
+          </div>
+        </div>
+
+        <div class="space-y-6 text-sm">
+
+          <!-- 1. CÀ PHÊ -->
+          <div id="menu-ca-phe" class="menu-category-block">
+            <div class="menu-category-label">
+              ✅ 1. CÀ PHÊ
+              <small>ĐẬM ĐÀ – TỈNH TÁO</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+
+              <!-- Cà phê đen -->
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê đen</p>
+                    <p class="menu-item-extra">Đậm vị truyền thống, dành cho người yêu cafe nguyên chất.</p>
+                    <div class="menu-badge-hot">
+                      <span>🔥</span> <span>Bán chạy</span>
+                    </div>
+                  </div>
+                  <span class="menu-price-pill">16k / 18k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Cà phê đen')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê đen', 16000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <!-- Cà phê sữa -->
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê sữa</p>
+                    <p class="menu-item-extra">Cà phê phin cùng sữa đặc béo nhẹ, dễ uống.</p>
+                  </div>
+                  <span class="menu-price-pill">17k / 19k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Cà phê sữa')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê sữa', 17000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <!-- Cà phê đen Sài Gòn -->
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê đen Sài Gòn</p>
+                    <p class="menu-item-extra">Đậm hơn, ngọt hơn phong cách miền Nam.</p>
+                  </div>
+                  <span class="menu-price-pill">18k / 20k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Cà phê đen Sài Gòn')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê đen Sài Gòn', 18000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <!-- Cà phê sữa Sài Gòn -->
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê sữa Sài Gòn</p>
+                    <p class="menu-item-extra">Ngọt béo, hợp cho buổi sáng năng lượng.</p>
+                  </div>
+                  <span class="menu-price-pill">20k / 22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Cà phê sữa Sài Gòn')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê sữa Sài Gòn', 20000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <!-- Cà phê muối -->
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Cà phê muối</p>
+                    <p class="menu-item-extra">Vị lạ miệng, béo mặn nhẹ, cực cuốn.</p>
+                    <div class="menu-badge-hot">
+                      <span>⭐</span> <span>Món gợi ý</span>
+                    </div>
+                  </div>
+                  <span class="menu-price-pill">28k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Cà phê muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Cà phê muối', 28000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <!-- Bạc xỉu -->
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Bạc xỉu</p>
+                    <p class="menu-item-extra">Nhiều sữa, ít cà phê – hợp khách thích béo.</p>
+                  </div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Bạc xỉu')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Bạc xỉu', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 2. CA CAO -->
+          <div id="menu-ca-cao" class="menu-category-block">
+            <div class="menu-category-label">
+              🍫 2. CA CAO
+              <small>NGỌT ẤM – DỄ UỐNG</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Ca cao nóng/đá</p>
+                    <p class="menu-item-extra">Hợp cho cả trời lạnh và trời nóng.</p>
+                  </div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Ca cao nóng/đá')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Ca cao nóng/đá', 25000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Ca cao muối</p>
+                    <p class="menu-item-extra">Đậm vị ca cao, hậu vị mằn mặn thú vị.</p>
+                  </div>
+                  <span class="menu-price-pill">26k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Ca cao muối')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Ca cao muối', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Socola nóng</p>
+                    <p class="menu-item-extra">Thơm béo, thích hợp cho tối thư giãn.</p>
+                  </div>
+                  <span class="menu-price-pill">26k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Socola nóng')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Socola nóng', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Ca cao latte</p>
+                    <p class="menu-item-extra">Mịn màng, thơm sữa, vị ca cao rõ.</p>
+                  </div>
+                  <span class="menu-price-pill">26k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Ca cao latte')" class="text-xs px-3 py-1.5 rounded-full bg-green-600 text-white hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Ca cao latte', 26000)" class="text-xs px-3 py-1.5 rounded-full border border-green-500 text-green-700 hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. TRÀ -->
+          <div id="menu-tra" class="menu-category-block">
+            <div class="menu-category-label">
+              🍵 3. TRÀ
+              <small>THANH MÁT</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà gừng</p><p class="menu-item-extra">Ấm họng, tốt khi thời tiết trở lạnh.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà gừng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà gừng', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà chanh</p><p class="menu-item-extra">Giải khát nhanh, vị chua ngọt dễ uống.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà chanh')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà chanh', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà Lipton</p><p class="menu-item-extra">Trà túi lọc quen thuộc, thơm nhẹ.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà Lipton')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà Lipton', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà đào</p><p class="menu-item-extra">Có miếng đào, vị thơm dễ chịu.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà đào')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà đào', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà vải</p><p class="menu-item-extra">Ngọt nhẹ, thơm vải, dễ uống.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà vải')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà vải', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà việt quất</p><p class="menu-item-extra">Màu đẹp, vị trái cây nhẹ nhàng.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Trà đào cam sả</p><p class="menu-item-extra">Mix vị thơm, hơi the, rất “trending”.</p></div>
+                  <span class="menu-price-pill">28k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà đào cam sả')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà đào cam sả', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 4. TRÀ SỮA -->
+          <div id="menu-tra-sua" class="menu-category-block">
+            <div class="menu-category-label">
+              🥤 4. TRÀ SỮA
+              <small>GIỚI TRẺ YÊU THÍCH</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Trà sữa truyền thống</p>
+                    <p class="menu-item-extra">Vị trà sữa cơ bản, topping dễ mix.</p>
+                  </div>
+                  <span class="menu-price-pill">M: 22k — L: 25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà sữa truyền thống')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà sữa truyền thống (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Trà sữa truyền thống (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Trà sữa thái xanh</p>
+                    <p class="menu-item-extra">Màu xanh đẹp mắt, béo thơm.</p>
+                  </div>
+                  <span class="menu-price-pill">M: 22k — L: 25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà sữa thái xanh')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà sữa thái xanh (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Trà sữa thái xanh (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Trà sữa khoai môn</p>
+                    <p class="menu-item-extra">Màu tím nhẹ, béo khoai môn.</p>
+                  </div>
+                  <span class="menu-price-pill">M: 22k — L: 25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Trà sữa khoai môn')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Trà sữa khoai môn (M)', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Trà sữa khoai môn (L)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div>
+                    <p class="menu-item-name">Sữa tươi trân châu đường đen</p>
+                    <p class="menu-item-extra">Trân châu dẻo, đường đen thơm.</p>
+                    <div class="menu-badge-hot">
+                      <span>🔥</span> <span>Rất được đặt</span>
+                    </div>
+                  </div>
+                  <span class="menu-price-pill">M: 25k — L: 28k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sữa tươi trân châu đường đen')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa tươi trân châu đường đen (M)', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (M)</button>
+                  <button onclick="addToCart('Sữa tươi trân châu đường đen (L)', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ (L)</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 5. SỮA CHUA -->
+          <div id="menu-sua-chua" class="menu-category-block">
+            <div class="menu-category-label">
+              🍶 5. SỮA CHUA
+              <small>MÁT LẠNH</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua hũ</p><p class="menu-item-extra">Chua nhẹ, béo vừa, ăn rất cuốn.</p></div>
+                  <span class="menu-price-pill">14k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sữa chua hũ')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua hũ', 14000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua đá</p><p class="menu-item-extra">Xay đá mát lạnh, hợp trời nóng.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sữa chua đá')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua đá', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua Việt Quất</p><p class="menu-item-extra">Vị trái cây thơm, màu đẹp.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sữa chua Việt Quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua Việt Quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua Dâu</p><p class="menu-item-extra">Hợp khách thích vị dâu ngọt thơm.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sữa chua Dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua Dâu', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sữa chua nếp cẩm</p><p class="menu-item-extra">Có nếp, ăn vui miệng, no nhẹ.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sữa chua nếp cẩm')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sữa chua nếp cẩm', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. SINH TỐ -->
+          <div id="menu-sinh-to" class="menu-category-block">
+            <div class="menu-category-label">
+              🍓 6. SINH TỐ
+              <small>TRÁI CÂY TƯƠI</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố xoài</p><p class="menu-item-extra">Ngọt thơm, dễ uống.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sinh tố xoài')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố xoài', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố bơ</p><p class="menu-item-extra">Béo bùi, rất hợp với sữa đặc.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sinh tố bơ')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố bơ', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố dâu</p><p class="menu-item-extra">Vị dâu chua nhẹ, màu hồng đẹp.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sinh tố dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố dâu', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sinh tố việt quất</p><p class="menu-item-extra">Hơi chua nhẹ, rất lạ miệng.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sinh tố việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sinh tố việt quất', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. NƯỚC ÉP -->
+          <div id="menu-nuoc-ep" class="menu-category-block">
+            <div class="menu-category-label">
+              🍈 7. NƯỚC ÉP
+              <small>THANH LỌC</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Chanh đá</p><p class="menu-item-extra">Chua ngọt, mát lạnh.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Chanh đá')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Chanh đá', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép thơm</p><p class="menu-item-extra">Thơm – ngọt – dễ uống.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Nước ép thơm')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép thơm', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép cà rốt</p><p class="menu-item-extra">Tốt cho mắt, màu cam đẹp.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Nước ép cà rốt')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép cà rốt', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép cóc</p><p class="menu-item-extra">Vị chua – mặn – ngọt kiểu “ăn vặt”.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Nước ép cóc')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép cóc', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Chanh dây</p><p class="menu-item-extra">Thơm chanh dây, chua thanh.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Chanh dây')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Chanh dây', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép cam</p><p class="menu-item-extra">Cam tươi vắt, giàu vitamin C.</p></div>
+                  <span class="menu-price-pill">28k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Nước ép cam')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép cam', 28000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Nước ép mix vị</p><p class="menu-item-extra">Mix 2–3 loại trái cây, uống rất vui.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Nước ép mix vị')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Nước ép mix vị', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 8. ĐÁ XAY -->
+          <div id="menu-da-xay" class="menu-category-block">
+            <div class="menu-category-label">
+              🧊 8. ĐÁ XAY
+              <small>LẠNH SÂU</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Chanh tuyết</p><p class="menu-item-extra">Vị chanh xay tuyết mịn, cực mát.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Chanh tuyết')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Chanh tuyết', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Matcha đá xay</p><p class="menu-item-extra">Thơm matcha, béo sữa.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Matcha đá xay')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Matcha đá xay', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Socola đá xay</p><p class="menu-item-extra">Đậm vị socola, xay mịn.</p></div>
+                  <span class="menu-price-pill">30k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Socola đá xay')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Socola đá xay', 30000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. SODA -->
+          <div id="menu-soda" class="menu-category-block">
+            <div class="menu-category-label">
+              🥤 9. SODA
+              <small>CÓ GAS SẢNG KHOÁI</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda Blue Sky</p><p class="menu-item-extra">Màu xanh mát, chua ngọt nhẹ.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Soda Blue Sky')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda Blue Sky', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda bạc hà</p><p class="menu-item-extra">Mát lạnh, thơm mùi bạc hà.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Soda bạc hà')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda bạc hà', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda dâu</p><p class="menu-item-extra">Hơi ngọt, mùi dâu dễ chịu.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Soda dâu')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda dâu', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Soda việt quất</p><p class="menu-item-extra">Màu tím đẹp, vị trái cây.</p></div>
+                  <span class="menu-price-pill">25k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Soda việt quất')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Soda việt quất', 25000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. NƯỚC ĐÓNG CHAI / SNACK -->
+          <div id="menu-dong-chai" class="menu-category-block">
+            <div class="menu-category-label">
+              🧃 10. NƯỚC ĐÓNG CHAI / SNACK
+              <small>NHANH – GỌN</small>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-3">
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Bò húc</p><p class="menu-item-extra">Tăng lực, dùng khi cần tỉnh táo.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Bò húc')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Bò húc', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Sting</p><p class="menu-item-extra">Nước tăng lực vị dâu quen thuộc.</p></div>
+                  <span class="menu-price-pill">22k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Sting')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Sting', 22000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Pepsi</p><p class="menu-item-extra">Nước ngọt có gas.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Pepsi')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Pepsi', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Khoáng</p><p class="menu-item-extra">Nước khoáng đóng chai.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Khoáng')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Khoáng', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Hạt dừa</p><p class="menu-item-extra">Snack nhâm nhi cùng nước uống.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Hạt dừa')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Hạt dừa', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+              <div class="menu-item-card">
+                <div class="menu-item-header">
+                  <div><p class="menu-item-name">Hạt hướng dương</p><p class="menu-item-extra">Nhâm nhi tám chuyện rất hợp.</p></div>
+                  <span class="menu-price-pill">15k</span>
+                </div>
+                <div class="menu-actions">
+                  <button onclick="openOrderModal('Hạt hướng dương')" class="bg-green-600 text-white px-3 py-1.5 text-xs rounded-full hover:bg-green-700 transition">Đặt hàng</button>
+                  <button onclick="addToCart('Hạt hướng dương', 15000)" class="border border-green-500 text-green-700 px-3 py-1.5 text-xs rounded-full hover:bg-green-50 transition">+ Giỏ hàng</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======= LIÊN HỆ ======= -->
+      <div id="lienheSection" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">📍 Liên hệ HƯƠNG CÀ PHÊ</h2>
+        <p class="text-sm mb-1"><b>HƯƠNG CÀ PHÊ</b></p>
+        <p class="text-sm mb-1">Địa chỉ: Ngọc Sơn Đông, xã Thăng Bình, TP. Đà Nẵng</p>
+        <p class="text-sm mb-4">
+          Điện thoại:
+          <a href="tel:0934128331" class="text-blue-600 hover:underline">
+            0934128331 (Hương)
+          </a>
+        </p>
+
+        <div class="aspect-video w-full overflow-hidden rounded-lg shadow">
+          <iframe
+            src="https://www.google.com/maps/place/H%C6%B0%C6%A1ng+C%C3%A0+Ph%C3%AA/@15.760688,108.3798643,575m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3169e1817ea070bb:0xa842e652c4ab9029!8m2!3d15.760688!4d108.3798643!16s%2Fg%2F11yz8g944_?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D"
+            width="100%" height="100%" style="border:0;" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- ======= FORM GÓP Ý (ADMIN XEM DANH SÁCH) ======= -->
+      <div id="gopyAdminSection" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">📜 Danh sách góp ý (Admin)</h2>
+        <div id="gopyAdminList" class="text-sm space-y-2">
+          Chỉ admin mới xem được danh sách góp ý.
+        </div>
+      </div>
+
+      <!-- ======= DANH SÁCH ĐƠN HÀNG (ADMIN) ======= -->
+      <div id="ordersSection" class="card p-4 hidden">
+        <h2 class="text-lg font-bold text-green-700 mb-3">📦 Danh sách khách đặt hàng (Admin)</h2>
+        <div id="ordersList" class="space-y-3 text-sm text-gray-700">
+          Đang tải danh sách đơn hàng...
+        </div>
+      </div>
+    </section>
+
+    <!-- ==== CỘT PHẢI ==== -->
+    <aside>
+      <!-- Thông báo nhanh -->
+      <div class="card p-3 text-sm mb-3">
+        <h3 class="font-semibold text-green-700 mb-2">⚡ Thông báo nhanh</h3>
+        <div id="thongbaoMarquee">
+          <div id="thongbaoContent">
+            <p>✔ Ship quanh Hà Lam và lân cận</p>
+            <p>✔ Bấm Thực Đơn chọn món và đặt hàng</p>
+            <p>✔ HƯƠNG CÀ PHÊ-Đến là mê</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUẢNG CÁO (HÌNH) 1 -->
+      <a href="https://zalo.me/0905638959"
+         target="_blank"
+         class="block card overflow-hidden">
+        <img
+          src="https://upanhnhanh.com/d87a2fedcbf0df263983d9dea9089082"
+          alt="Quảng cáo HƯƠNG CÀ PHÊ"
+          class="w-full h-full object-cover">
+      </a>
+
+      <!-- QUẢNG CÁO (HÌNH) 2 -->
+      <div class="mt-3">
+        <a href="https://zalo.me/0964307247"
+           target="_blank"
+           class="block card overflow-hidden">
+          <img
+            src="https://upanhnhanh.com/2adb26e8baa8a5f59e8fbfc54643f192"
+            alt="Quảng cáo HƯƠNG CÀ PHÊ 2"
+            class="w-full h-32 md:h-40 object-cover">
+        </a>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="container-max mx-auto px-4 py-4 text-center text-xs text-gray-600">
+    © 2025 HƯƠNG CÀ PHÊ — Thiết kế bởi <b>Mr.Thiên</b>
+  </footer>
+
+  <!-- Bộ đếm lượt truy cập -->
+  <div class="flex justify-center mb-4">
+    <a href="https://hits.sh/coffee-nam.github.io/trangchu/">
+      <img
+        alt="Lượt truy cập"
+        src="https://hits.sh/coffee-nam.github.io/trangchu.svg?label=L%C6%B0%E1%BB%A3t%20Truy%20C%E1%BA%ADp&extraCount=2000"
+      />
+    </a>
+  </div>
+  <!-- ======== MODAL GIỎ HÀNG ======== -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-lg shadow-xl">
+      <h3 class="text-lg font-semibold text-green-700 mb-3 flex items-center gap-2">
+        🛒 Giỏ hàng của bạn
+      </h3>
+      <div id="cartItems" class="max-h-72 overflow-y-auto text-sm space-y-2"></div>
+      <div class="mt-3 flex justify-between text-sm font-semibold text-gray-700">
+        <span>Tổng cộng:</span>
+        <span id="cartTotal">0đ</span>
+      </div>
+      <div class="mt-4 flex flex-wrap justify-between gap-2 text-sm">
+        <button onclick="clearCart()" class="px-3 py-1.5 rounded border border-red-400 text-red-500 hover:bg-red-50 transition">
+          Xóa hết
+        </button>
+        <div class="flex gap-2 ml-auto">
+          <button onclick="closeCartModal()" class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+            Đóng
+          </button>
+          <button onclick="openOrderFromCart()" class="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700 transition">
+            Đặt hàng
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <footer>
-    👁️ Lượt truy cập: <span id="visitCount">0</span> |
-    © 2026 Hương Cà Phê — Thiết kế bởi Mr.Thiên
-  </footer>
+  <!-- ======== MODAL ĐẶT HÀNG ======== -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-md shadow-xl">
+      <h3 class="text-lg font-semibold text-green-700 mb-3">📦 Thông tin đặt hàng</h3>
+      <p class="text-sm mb-2 text-gray-700">
+        Món / đơn hàng: <b id="orderItemName">...</b>
+      </p>
+      <div class="space-y-2 text-sm">
+        <input id="orderCustomerName" class="border rounded w-full p-2" placeholder="Họ và tên" />
+        <input id="orderCustomerPhone" class="border rounded w-full p-2" placeholder="Số điện thoại" />
+        <textarea id="orderCustomerAddress" class="border rounded w-full p-2" rows="2" placeholder="Địa chỉ giao hàng"></textarea>
+        <textarea id="orderNote" class="border rounded w-full p-2" rows="2" placeholder="Ghi chú (ví dụ: ít đá, ít ngọt...)"></textarea>
+      </div>
+      <div class="flex justify-end gap-2 mt-4 text-sm">
+        <button onclick="closeOrderModal()" class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+          Hủy
+        </button>
+        <button onclick="submitOrder()" class="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700 transition">
+          Gửi đơn
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    // Đếm lượt truy cập (theo trình duyệt)
-    let count = localStorage.getItem('huongcafe_visit');
-    if(!count){
-      count = 1;
-    }else{
-      count = parseInt(count) + 1;
+  <!-- ======== MODAL ĐĂNG NHẬP ADMIN ======== -->
+  <div id="adminLoginModal" class="modal">
+    <div class="modal-content bg-white rounded-xl p-5 w-11/12 max-w-sm shadow-xl card" id="loginBox">
+      <h3 class="font-semibold text-green-700 mb-2 text-base">🔐 Đăng nhập quản trị</h3>
+      <p class="text-xs text-gray-600 mb-2">
+        Chỉ dành cho Admin để xem danh sách góp ý &amp; đơn đặt hàng.
+      </p>
+      <input id="loginEmail" type="email" placeholder="Email admin"
+             class="w-full border p-1.5 rounded mb-1 text-sm" />
+      <input id="loginPass" type="password" placeholder="Mật khẩu"
+             class="w-full border p-1.5 rounded mb-2 text-sm" />
+
+      <!-- Checkbox ghi nhớ tài khoản -->
+      <label class="flex items-center gap-2 text-xs text-gray-600 mb-3">
+        <input type="checkbox" id="rememberLogin" class="rounded border-gray-300">
+        <span>Ghi nhớ tài khoản trên thiết bị này (không dùng trên máy công cộng)</span>
+      </label>
+
+      <div class="flex justify-end gap-2 text-sm">
+        <button type="button"
+                onclick="closeAdminLogin()"
+                class="px-3 py-1.5 rounded border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+          Hủy
+        </button>
+        <button type="button"
+                onclick="doLogin()"
+                class="px-3 py-1.5 rounded bg-green-600 text-white hover:bg-green-700 transition">
+          Đăng nhập
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZALO FLOAT BUTTON -->
+  <a href="https://zalo.me/0905638959" target="_blank" class="zalo-button" title="Chat qua Zalo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+  </a>
+  <!-- ======== FIREBASE SCRIPT (MODULE) ======== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth, signInWithEmailAndPassword,
+      signOut, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore, doc, addDoc, deleteDoc, updateDoc,
+      collection, serverTimestamp, onSnapshot, query, orderBy
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpFxMdzcS_X5upNyf2tOnt4Nx95UH7e1I",
+      authDomain: "tracuuthcs-leloi.firebaseapp.com",
+      projectId: "tracuuthcs-leloi",
+      storageBucket: "tracuuthcs-leloi.firebasestorage.app",
+      messagingSenderId: "305178645123",
+      appId: "1:305178645123:web:46d1c907461d9e160a41b6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const adminEmail = "thien.miraeasset@gmail.com";
+
+    let currentUser = null;
+    let ordersUnsub = null;
+    let gopyUnsub = null;
+
+    // 👉 Cache đơn hàng để in hóa đơn
+    let ordersCache = {};
+
+    // ===== GHI NHỚ EMAIL ADMIN (LOCALSTORAGE) =====
+    function prefillRememberedLogin() {
+      try {
+        const remember = localStorage.getItem("namcoffee_admin_remember");
+        if (remember === "1") {
+          const savedEmail = localStorage.getItem("namcoffee_admin_email") || "";
+          const emailInput = document.getElementById("loginEmail");
+          const rememberCheckbox = document.getElementById("rememberLogin");
+          if (emailInput) emailInput.value = savedEmail;
+          if (rememberCheckbox) rememberCheckbox.checked = true;
+        }
+      } catch (e) {
+        // ignore
+      }
     }
-    localStorage.setItem('huongcafe_visit', count);
-    document.getElementById('visitCount').innerText = count;
+
+    function saveRememberOption(email) {
+      const rememberCheckbox = document.getElementById("rememberLogin");
+      try {
+        if (rememberCheckbox && rememberCheckbox.checked) {
+          localStorage.setItem("namcoffee_admin_remember", "1");
+          localStorage.setItem("namcoffee_admin_email", email);
+        } else {
+          localStorage.removeItem("namcoffee_admin_remember");
+          localStorage.removeItem("namcoffee_admin_email");
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    // Đăng nhập admin
+    window.doLogin = async function () {
+      const emailInput = document.getElementById("loginEmail");
+      const passInput = document.getElementById("loginPass");
+      const email = emailInput ? emailInput.value.trim() : "";
+      const pass = passInput ? passInput.value.trim() : "";
+      if (!email || !pass) {
+        alert("Vui lòng nhập đầy đủ Email và Mật khẩu!");
+        return;
+      }
+      try {
+        const userCred = await signInWithEmailAndPassword(auth, email, pass);
+        if (userCred.user.email !== adminEmail) {
+          await signOut(auth);
+          alert("Tài khoản này không có quyền admin!");
+          return;
+        }
+        // ✅ Lưu tuỳ chọn ghi nhớ email nếu checkbox được tick
+        saveRememberOption(email);
+      } catch (e) {
+        alert("Đăng nhập thất bại: " + e.message);
+      }
+    };
+
+    // Đăng xuất
+    window.doLogout = async function () {
+      await signOut(auth);
+    };
+
+    function enableAdminUI(isAdmin) {
+      const gopyMenu = document.getElementById("gopyMenu");
+      const orderListMenu = document.getElementById("orderListMenu");
+      const adminLoginNav = document.getElementById("adminLoginNav");
+
+      if (isAdmin) {
+        gopyMenu?.classList.remove("hidden");
+        orderListMenu?.classList.remove("hidden");
+        adminLoginNav?.classList.add("hidden");
+        startOrdersListener();
+        startGopyListener();
+      } else {
+        gopyMenu?.classList.add("hidden");
+        orderListMenu?.classList.add("hidden");
+        adminLoginNav?.classList.remove("hidden");
+
+        if (ordersUnsub) {
+          ordersUnsub();
+          ordersUnsub = null;
+        }
+        if (gopyUnsub) {
+          gopyUnsub();
+          gopyUnsub = null;
+        }
+      }
+    }
+
+    // Lắng nghe trạng thái đăng nhập
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user && user.email === adminEmail ? user : null;
+
+      const loginBoxEl = document.getElementById("loginBox");
+      const loggedBoxEl = document.getElementById("loggedBox");
+      const loggedInfoEl = document.getElementById("loggedInfo");
+      const adminLoginModal = document.getElementById("adminLoginModal");
+
+      if (currentUser) {
+        if (loginBoxEl) loginBoxEl.classList.add("hidden");
+        if (loggedBoxEl) loggedBoxEl.classList.remove("hidden");
+        if (loggedInfoEl) loggedInfoEl.innerHTML = `Xin chào Admin`;
+        enableAdminUI(true);
+        if (adminLoginModal) adminLoginModal.classList.remove("show");
+      } else {
+        if (loginBoxEl) loginBoxEl.classList.remove("hidden");
+        if (loggedBoxEl) loggedBoxEl.classList.add("hidden");
+        enableAdminUI(false);
+      }
+    });
+
+    // Lưu góp ý
+    window.sendGopy = async function () {
+      const nameEl = document.getElementById("gopyName");
+      const textEl = document.getElementById("gopyText");
+      const name = nameEl ? nameEl.value.trim() : "";
+      const content = textEl ? textEl.value.trim() : "";
+      if (!name || !content) {
+        alert("Vui lòng nhập Họ tên và Nội dung góp ý!");
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "gopy"), {
+          name,
+          content,
+          created: serverTimestamp()
+        });
+        if (nameEl) nameEl.value = "";
+        if (textEl) textEl.value = "";
+        alert(`HƯƠNG CÀ PHÊ xin chân thành ghi nhận góp ý của ${name}. Chúng tôi sẽ lắng nghe và cải thiện dịch vụ tốt hơn trong thời gian tới. Cảm ơn bạn đã đồng hành cùng HƯƠNG CÀ PHÊ! 💚`);
+      } catch (e) {
+        alert("Lỗi khi gửi góp ý: " + e.message);
+      }
+    };
+
+    // Lắng nghe danh sách góp ý (admin)
+    function startGopyListener() {
+      const listEl = document.getElementById("gopyAdminList");
+      if (!listEl) return;
+
+      if (gopyUnsub) {
+        gopyUnsub();
+        gopyUnsub = null;
+      }
+
+      const qGopy = query(collection(db, "gopy"), orderBy("created", "desc"));
+      gopyUnsub = onSnapshot(qGopy, (snapshot) => {
+        if (snapshot.empty) {
+          listEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có góp ý nào.</p>`;
+          return;
+        }
+
+        let html = "";
+        snapshot.forEach((docu) => {
+          const d = docu.data();
+          const created = d.created?.toDate
+            ? d.created.toDate().toLocaleString("vi-VN")
+            : "";
+          html += `
+            <div class="border rounded p-2 bg-gray-50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-semibold text-sm">${d.name || "Khách"}</span>
+                <span class="text-[10px] text-gray-500">${created}</span>
+              </div>
+              <div class="text-sm text-gray-800">${d.content || ""}</div>
+              <button onclick="deleteGopy('${docu.id}')" class="mt-1 text-xs text-red-500 underline">
+                Xóa góp ý
+              </button>
+            </div>
+          `;
+        });
+        listEl.innerHTML = html;
+      });
+    }
+
+    window.deleteGopy = async function (id) {
+      if (!currentUser || currentUser.email !== adminEmail) {
+        alert("Chỉ admin mới được xóa góp ý!");
+        return;
+      }
+      if (!confirm("Bạn có chắc muốn xóa góp ý này không?")) return;
+      await deleteDoc(doc(db, "gopy", id));
+    };
+
+    // Lưu đơn hàng xuống Firestore
+    window.saveOrderToFirestore = async function (orderData) {
+      try {
+        await addDoc(collection(db, "orders"), {
+          ...orderData,
+          status: "pending",
+          created: serverTimestamp()
+        });
+      } catch (err) {
+        console.error("Lỗi lưu đơn hàng:", err);
+      }
+    };
+
+    // Cập nhật trạng thái đơn hàng
+    window.updateOrderStatus = async function (orderId, newStatus) {
+      if (!currentUser || currentUser.email !== adminEmail) {
+        alert("Chỉ admin mới được cập nhật trạng thái đơn hàng!");
+        return;
+      }
+      try {
+        await updateDoc(doc(db, "orders", orderId), { status: newStatus });
+      } catch (err) {
+        console.error("Lỗi cập nhật trạng thái:", err);
+        alert("Lỗi khi cập nhật trạng thái đơn hàng!");
+      }
+    };
+
+    // 👉 HÀM IN HÓA ĐƠN KHỔ 80mm
+    window.printOrder = function (orderId) {
+      if (!currentUser || currentUser.email !== adminEmail) {
+        alert("Chỉ admin mới được in hóa đơn!");
+        return;
+      }
+
+      const d = ordersCache[orderId];
+      if (!d) {
+        alert("Không tìm thấy dữ liệu đơn hàng để in.");
+        return;
+      }
+
+      const now = new Date();
+      const printTime = now.toLocaleString("vi-VN");
+
+      // Thông tin quán
+      const shopName = "HƯƠNG CÀ PHÊ";
+      const shopAddress = "62 Trần Thị Lý, Xã Thăng Bình, TP. Đà Nẵng";
+      const shopPhone = "0905 638 959";
+
+      let total = 0;
+      let itemsHtml = "";
+
+      (d.items || []).forEach((item, idx) => {
+        const qty = item.qty || 1;
+        const price = item.price || 0;
+        const lineTotal = price * qty;
+        total += lineTotal;
+
+        itemsHtml += `
+          <tr>
+            <td>${idx + 1}. ${item.name} x ${qty}</td>
+            <td class="right">
+              ${price ? price.toLocaleString("vi-VN") + "đ" : ""}
+            </td>
+          </tr>
+        `;
+      });
+
+      const totalText = total.toLocaleString("vi-VN") + "đ";
+
+      const billHtml = `
+        <div class="bill">
+          <div class="center bold big">${shopName}</div>
+          <div class="center small">${shopAddress}</div>
+          <div class="center small">ĐT: ${shopPhone}</div>
+          <hr>
+          <div class="small">Thời gian in: ${printTime}</div>
+          <div class="small">Khách hàng: ${d.customerName || ""}</div>
+          <div class="small">SĐT: ${d.customerPhone || ""}</div>
+          <div class="small">Địa chỉ: ${d.customerAddress || ""}</div>
+          <hr>
+          <table class="items">
+            <tbody>
+              ${itemsHtml}
+            </tbody>
+          </table>
+          <hr>
+          <div class="right bold">Tổng cộng: ${totalText}</div>
+          <hr>
+          <div class="center small">Cảm ơn quý khách !</div>
+          <div class="center small">Hẹn gặp lại</div>
+        </div>
+      `;
+
+      const printWindow = window.open("", "", "width=400,height=600");
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Hóa đơn</title>
+            <style>
+              body {
+                margin: 0;
+                padding: 0;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+              }
+              .bill {
+                width: 80mm;
+                padding: 4px 8px;
+                font-size: 12px;
+              }
+              .center { text-align: center; }
+              .right  { text-align: right; }
+              .bold   { font-weight: 600; }
+              .big    { font-size: 14px; }
+              .small  { font-size: 11px; }
+              hr {
+                border: 0;
+                border-top: 1px dashed #000;
+                margin: 4px 0;
+              }
+              table {
+                width: 100%;
+                border-collapse: collapse;
+              }
+              td {
+                font-size: 12px;
+                vertical-align: top;
+              }
+              .items td:last-child {
+                white-space: nowrap;
+              }
+              @page {
+                size: 80mm auto;
+                margin: 2mm;
+              }
+            </style>
+          
+<style>
+/* ===== HƯƠNG CÀ PHÊ – Coffee Theme Override ===== */
+:root{
+  --coffee:#6b3e26;
+  --coffee-dark:#4b2a18;
+  --cream:#f6efe7;
+  --card:#fffaf4;
+  --soft:#f3e4d7;
+}
+
+body{
+  background:var(--cream) !important;
+}
+
+.card{
+  background:var(--card) !important;
+  border-radius:14px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+}
+
+.border-green-500{ border-color:var(--coffee) !important; }
+.bg-green-50{ background:var(--soft) !important; }
+.text-green-700{ color:var(--coffee) !important; }
+.bg-green-600{ background:var(--coffee) !important; }
+.bg-green-700{ background:var(--coffee-dark) !important; }
+.border-green-500{ border-color:var(--coffee) !important; }
+.text-green-600{ color:var(--coffee) !important; }
+.hover\:bg-green-700:hover{ background:var(--coffee-dark) !important; }
+.hover\:bg-green-50:hover{ background:var(--soft) !important; }
+
+.banner-marquee{
+  background:var(--coffee) !important;
+  color:white !important;
+}
+
+.menu-price-pill{
+  background:var(--coffee) !important;
+  color:white !important;
+}
+
+button{
+  transition:all .2s ease;
+}
+</style>
+
+</head>
+          <body>
+            ${billHtml}
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+      printWindow.close();
+    };
+
+    // Lắng nghe danh sách đơn hàng (admin)
+    function startOrdersListener() {
+      const ordersListEl = document.getElementById("ordersList");
+      if (!ordersListEl) return;
+
+      if (ordersUnsub) {
+        ordersUnsub();
+        ordersUnsub = null;
+      }
+
+      const qOrders = query(collection(db, "orders"), orderBy("created", "desc"));
+      ordersUnsub = onSnapshot(qOrders, (snapshot) => {
+        if (snapshot.empty) {
+          ordersListEl.innerHTML = `<p class="text-gray-500 text-sm">Chưa có đơn hàng nào.</p>`;
+          return;
+        }
+
+        let html = "";
+        ordersCache = {}; // reset cache
+
+        snapshot.forEach((docu) => {
+          const d = docu.data();
+          const created = d.created?.toDate
+            ? d.created.toDate().toLocaleString("vi-VN")
+            : "";
+
+          // Lưu cache để in
+          ordersCache[docu.id] = {
+            ...d,
+            id: docu.id,
+            createdText: created
+          };
+
+          const itemsText = (d.items || [])
+            .map(i => {
+              const priceText = i.price
+                ? ` - ${i.price.toLocaleString("vi-VN")}đ`
+                : "";
+              return `• ${i.name} x ${i.qty}${priceText}`;
+            })
+            .join("<br>");
+
+          const status = d.status || "pending";
+          const statusLabel = status === "done" ? "Đã xử lý" : "Chưa xử lý";
+          const statusClass = status === "done"
+            ? "bg-green-100 text-green-700"
+            : "bg-yellow-100 text-yellow-700";
+
+          const toggleBtn = status === "done"
+            ? `<button onclick="updateOrderStatus('${docu.id}','pending')" class="mt-2 text-xs px-2 py-1 rounded border border-yellow-400 text-yellow-700 hover:bg-yellow-50">Đánh dấu CHƯA xử lý</button>`
+            : `<button onclick="updateOrderStatus('${docu.id}','done')" class="mt-2 text-xs px-2 py-1 rounded border border-green-500 text-green-700 hover:bg-green-50">Đánh dấu ĐÃ xử lý</button>`;
+
+          // Nút in hóa đơn chỉ hiện khi đã xử lý
+          const printBtn = status === "done"
+            ? `<button onclick="printOrder('${docu.id}')"
+                 class="mt-2 text-xs px-2 py-1 rounded border border-blue-500 text-blue-600 hover:bg-blue-50">
+                 In hóa đơn
+               </button>`
+            : "";
+
+          html += `
+            <div class="border rounded-lg p-3 bg-gray-50">
+              <div class="flex justify-between items-center mb-1">
+                <span class="text-xs text-gray-500">${created}</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full ${statusClass} uppercase">
+                  ${statusLabel}
+                </span>
+              </div>
+              <div class="text-sm">
+                <p><b>Khách:</b> ${d.customerName} - ${d.customerPhone}</p>
+                <p><b>Địa chỉ:</b> ${d.customerAddress}</p>
+                <p class="mt-1"><b>Món:</b><br>${itemsText}</p>
+                ${d.note ? `<p class="mt-1"><b>Ghi chú:</b> ${d.note}</p>` : ""}
+                <div class="flex flex-wrap gap-2 mt-2">
+                  ${toggleBtn}
+                  ${printBtn}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        ordersListEl.innerHTML = html;
+      });
+    }
+
+    // Show/hide các section trung tâm
+    window.showSection = function (section) {
+      const gioithieu = document.getElementById('gioithieu');
+      const sanpham = document.getElementById('sanpham');
+      const lienheSection = document.getElementById('lienheSection');
+      const gopyAdminSection = document.getElementById('gopyAdminSection');
+      const ordersSection = document.getElementById('ordersSection');
+
+      [gioithieu, sanpham, lienheSection, gopyAdminSection, ordersSection].forEach(el => {
+        if (el) el.classList.add('hidden');
+      });
+
+      if (section === 'gioithieu') {
+        gioithieu?.classList.remove('hidden');
+      } else if (section === 'sanpham') {
+        sanpham?.classList.remove('hidden');
+      } else if (section === 'lienhe') {
+        lienheSection?.classList.remove('hidden');
+      } else if (section === 'gopyAdmin') {
+        if (currentUser && currentUser.email === adminEmail) {
+          gopyAdminSection?.classList.remove('hidden');
+        } else {
+          alert("Chỉ admin mới được xem danh sách góp ý!");
+          gioithieu?.classList.remove('hidden');
+        }
+      } else if (section === 'orders') {
+        if (currentUser && currentUser.email === adminEmail) {
+          ordersSection?.classList.remove('hidden');
+        } else {
+          alert("Chỉ admin mới được xem danh sách đơn đặt hàng!");
+          gioithieu?.classList.remove('hidden');
+        }
+      } else {
+        gioithieu?.classList.remove('hidden');
+      }
+    };
+
+    // Khởi tạo
+    window.addEventListener("load", () => {
+      prefillRememberedLogin();   // tự động điền lại email nếu có lưu
+      showSection('gioithieu');
+    });
   </script>
 
+  <!-- ⭐⭐⭐ GIỎ HÀNG & ĐẶT HÀNG & DARK MODE (SCRIPT THƯỜNG) ⭐⭐⭐ -->
+  <script>
+    let cart = [];
+    let currentOrderSource = "single"; // 'single' | 'cart'
+    let currentOrderItem = "";
+
+    function formatCurrency(v) {
+      if (!v) return "0đ";
+      return v.toLocaleString("vi-VN") + "đ";
+    }
+
+    function loadCart() {
+      try {
+        const data = localStorage.getItem("namcoffee_cart");
+        cart = data ? JSON.parse(data) : [];
+      } catch (e) {
+        cart = [];
+      }
+      updateCartCount();
+      renderCart();
+    }
+
+    function saveCart() {
+      localStorage.setItem("namcoffee_cart", JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartCount() {
+      const countEl = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      if (countEl) countEl.textContent = totalItems;
+    }
+
+    window.addToCart = function(name, price) {
+      const existing = cart.find(i => i.name === name && i.price === price);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      saveCart();
+      alert(`Đã thêm "${name}" vào giỏ hàng!`);
+    };
+
+    function renderCart() {
+      const container = document.getElementById("cartItems");
+      const totalEl = document.getElementById("cartTotal");
+      if (!container) return;
+      container.innerHTML = "";
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-sm">Giỏ hàng hiện đang trống.</p>';
+        if (totalEl) totalEl.textContent = "0đ";
+        return;
+      }
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        const lineTotal = item.price * item.qty;
+        total += lineTotal;
+        const div = document.createElement("div");
+        div.className = "flex items-center justify-between border rounded-lg px-3 py-2 bg-gray-50";
+        div.innerHTML = `
+          <div class="text-sm">
+            <div class="font-medium text-gray-800">${item.name}</div>
+            <div class="text-xs text-gray-500">${formatCurrency(item.price)} x ${item.qty} = <b>${formatCurrency(lineTotal)}</b></div>
+          </div>
+          <div class="flex items-center gap-2 text-xs">
+            <button onclick="decreaseQty(${index})" class="px-2 py-1 rounded border border-gray-300 hover:bg-gray-100">-</button>
+            <button onclick="increaseQty(${index})" class="px-2 py-1 rounded border border-gray-300 hover:bg-gray-100">+</button>
+            <button onclick="removeItem(${index})" class="px-2 py-1 rounded border border-red-300 text-red-500 hover:bg-red-50">Xóa</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      if (totalEl) totalEl.textContent = formatCurrency(total);
+    }
+
+    window.decreaseQty = function(index) {
+      if (!cart[index]) return;
+      cart[index].qty -= 1;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      saveCart();
+    };
+
+    window.increaseQty = function(index) {
+      if (!cart[index]) return;
+      cart[index].qty += 1;
+      saveCart();
+    };
+
+    window.removeItem = function(index) {
+      if (!cart[index]) return;
+      if (!confirm("Xóa món này khỏi giỏ hàng?")) return;
+      cart.splice(index, 1);
+      saveCart();
+    };
+
+    window.clearCart = function() {
+      if (cart.length === 0) return;
+      if (!confirm("Bạn có chắc muốn xóa hết giỏ hàng?")) return;
+      cart = [];
+      saveCart();
+    };
+
+    window.openCart = function() {
+      const modal = document.getElementById("cartModal");
+      if (modal) {
+        modal.classList.add("show");
+      }
+      renderCart();
+    };
+
+    function closeCartModal() {
+      const modal = document.getElementById("cartModal");
+      if (modal) {
+        modal.classList.remove("show");
+      }
+    }
+    window.closeCartModal = closeCartModal;
+
+    window.openOrderModal = function(itemName) {
+      currentOrderSource = "single";
+      currentOrderItem = itemName;
+      const orderNameEl = document.getElementById("orderItemName");
+      if (orderNameEl) orderNameEl.textContent = itemName;
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.classList.add("show");
+    };
+
+    window.openOrderFromCart = function() {
+      if (cart.length === 0) {
+        alert("Giỏ hàng đang trống, vui lòng thêm sản phẩm trước!");
+        return;
+      }
+      currentOrderSource = "cart";
+      currentOrderItem = "Giỏ hàng (" + cart.length + " sản phẩm)";
+      const orderNameEl = document.getElementById("orderItemName");
+      if (orderNameEl) orderNameEl.textContent = currentOrderItem;
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.classList.add("show");
+    };
+
+    window.closeOrderModal = function() {
+      const modal = document.getElementById("orderModal");
+      if (modal) modal.classList.remove("show");
+
+      const nameEl = document.getElementById("orderCustomerName");
+      const phoneEl = document.getElementById("orderCustomerPhone");
+      const addrEl = document.getElementById("orderCustomerAddress");
+      const noteEl = document.getElementById("orderNote");
+
+      if (nameEl) nameEl.value = "";
+      if (phoneEl) phoneEl.value = "";
+      if (addrEl) addrEl.value = "";
+      if (noteEl) noteEl.value = "";
+    };
+
+    window.submitOrder = function() {
+      const nameEl = document.getElementById("orderCustomerName");
+      const phoneEl = document.getElementById("orderCustomerPhone");
+      const addrEl = document.getElementById("orderCustomerAddress");
+      const noteEl = document.getElementById("orderNote");
+
+      const name = nameEl ? nameEl.value.trim() : "";
+      const phone = phoneEl ? phoneEl.value.trim() : "";
+      const address = addrEl ? addrEl.value.trim() : "";
+      const note = noteEl ? noteEl.value.trim() : "";
+
+      if (!name || !phone || !address) {
+        alert("Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Địa chỉ!");
+        return;
+      }
+
+      let items = [];
+      if (currentOrderSource === "single") {
+        // Đơn 1 món – hiện tại không lưu price (có thể nâng cấp sau)
+        items = [{ name: currentOrderItem, qty: 1 }];
+      } else {
+        items = cart.map(i => ({
+          name: i.name,
+          qty: i.qty,
+          price: i.price
+        }));
+      }
+
+      const orderData = {
+        source: currentOrderSource,
+        items,
+        customerName: name,
+        customerPhone: phone,
+        customerAddress: address,
+        note
+      };
+
+      if (window.saveOrderToFirestore) {
+        window.saveOrderToFirestore(orderData);
+      }
+
+      alert("Cảm ơn bạn! Đơn hàng đã được ghi nhận. HƯƠNG CÀ PHÊ sẽ liên hệ xác nhận trong thời gian sớm nhất.");
+
+      if (currentOrderSource === "cart") {
+        cart = [];
+        saveCart();
+        closeCartModal();
+      }
+      closeOrderModal();
+    };
+
+    // ===== ĐĂNG NHẬP ADMIN (MỞ / ĐÓNG MODAL) =====
+    window.openAdminLogin = function () {
+      const modal = document.getElementById("adminLoginModal");
+      if (modal) modal.classList.add("show");
+    };
+
+    window.closeAdminLogin = function () {
+      const modal = document.getElementById("adminLoginModal");
+      if (modal) modal.classList.remove("show");
+      const emailInput = document.getElementById("loginEmail");
+      const passInput = document.getElementById("loginPass");
+      if (emailInput) emailInput.value = "";
+      if (passInput) passInput.value = "";
+    };
+
+    // Đóng modal khi bấm nền tối
+    window.addEventListener("click", function(e) {
+      const cartModal = document.getElementById("cartModal");
+      const orderModal = document.getElementById("orderModal");
+      const adminLoginModal = document.getElementById("adminLoginModal");
+
+      if (e.target === cartModal) {
+        closeCartModal();
+      }
+      if (e.target === orderModal) {
+        closeOrderModal();
+      }
+      if (e.target === adminLoginModal) {
+        closeAdminLogin();
+      }
+    });
+
+    // ===== DARK MODE =====
+    function toggleDarkMode() {
+      const body = document.body;
+      body.classList.toggle("dark-mode");
+      const isDark = body.classList.contains("dark-mode");
+      const icon = document.getElementById("themeIcon");
+      const text = document.getElementById("themeText");
+
+      if (icon) icon.textContent = isDark ? "☀️" : "🌙";
+      if (text) text.textContent = isDark ? "Light" : "Dark";
+
+      try {
+        localStorage.setItem("huongcoffee_theme", isDark ? "dark" : "light");
+      } catch (e) {}
+    }
+    window.toggleDarkMode = toggleDarkMode;
+
+    function loadTheme() {
+      try {
+        const t = localStorage.getItem("huongcoffee_theme");
+        if (t === "dark") {
+          document.body.classList.add("dark-mode");
+          const icon = document.getElementById("themeIcon");
+          const text = document.getElementById("themeText");
+          if (icon) icon.textContent = "☀️";
+          if (text) text.textContent = "Light";
+        }
+      } catch (e) {}
+    }
+
+    // Khởi động giỏ + theme
+    window.addEventListener("load", function () {
+      loadCart();
+      loadTheme();
+    });
+  </script>
 </body>
 </html>
